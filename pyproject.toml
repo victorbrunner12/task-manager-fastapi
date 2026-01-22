@@ -18,7 +18,9 @@ build-backend = "poetry.core.masonry.api"
 
 [dependency-groups]
 dev = [
-    "ruff (>=0.14.13,<0.15.0)"
+    "ruff (>=0.14.13,<0.15.0)",
+    "pytest (>=9.0.2,<10.0.0)",
+    "pytest-cov (>=7.0.0,<8.0.0)"
 ]
 
 # Configurando o RUFF
@@ -42,3 +44,9 @@ select = ["I", "F", "E", "W", "PL", "PT", "Q"]
 [tool.ruff.format]
 preview = true
 quote-style = "double" # Estilo de aspas, "single" = '' para todas Strings.
+
+# Configuração do pytest
+[tool.pytest.ini_options] # ini_options = Opções de inicialização
+pythonpath = "." # pythonpath configura onde é pra rodar os testes, o "." indica na pasta onde o pyproject.toml se encontra.
+addopts = "-p no:warnings" # Removendo os avisos desnecessários da tela
+
