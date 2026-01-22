@@ -20,7 +20,8 @@ build-backend = "poetry.core.masonry.api"
 dev = [
     "ruff (>=0.14.13,<0.15.0)",
     "pytest (>=9.0.2,<10.0.0)",
-    "pytest-cov (>=7.0.0,<8.0.0)"
+    "pytest-cov (>=7.0.0,<8.0.0)",
+    "taskipy (>=1.14.1,<2.0.0)"
 ]
 
 # Configurando o RUFF
@@ -49,4 +50,19 @@ quote-style = "double" # Estilo de aspas, "single" = '' para todas Strings.
 [tool.pytest.ini_options] # ini_options = Opções de inicialização
 pythonpath = "." # pythonpath configura onde é pra rodar os testes, o "." indica na pasta onde o pyproject.toml se encontra.
 addopts = "-p no:warnings" # Removendo os avisos desnecessários da tela
+
+# Configurando o TaskiPY
+[tool.taskipy.tasks]
+# Juntando comandos com taskipy
+# Rodar um comando e outros em seguida, sem precisar digitar os dois ou mais comandos seguidos.
+# Para identificação os nomes dos pre e post de algum comando tem que ser: "pre_NOMEDATASK".
+# Ex: pre_lint: Task roda antes de rodar o link quando form chamado "task lint"
+
+lint = "ruff check" # Adicionando a variavel "lint" como uma forma mais facil e rapida de rodar o "ruff check"
+pre_format = "ruff check --fix" # Rodando o comando de correção do código antes de rodar o format.
+format = "ruff format" # (Formatação completa) Adicionando a varaivel "format" como uma forma mais facil e rapida de rodar o "ruff format"
+run = "fastapi dev task_manager_fastapi/app.py" # Forma facil de subir a aplicação com fastapi
+pre_test = "task lint" # Comando para rodar antes do test
+test = "pytest -s -x --cov=task_manager_fastapi -vv" # Forma facil de rodar os testes do app
+post_test = "coverage html" # Comando para criar o html
 
