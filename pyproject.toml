@@ -20,3 +20,25 @@ build-backend = "poetry.core.masonry.api"
 dev = [
     "ruff (>=0.14.13,<0.15.0)"
 ]
+
+# Configurando o RUFF
+[tool.ruff]
+line-length = 79 # Limitando o numero de caracteres numa linha de codigo seguindo a PEP.
+extend-exclude = ["migrations"] # Excluindo todos os codigos da verificação do ruff que forem criados na pasta "migrations"
+
+# Configurando os tipos de verificações (BOAS PRATICAS) para serem feitas
+# I = Verificação de ordenação de imports
+# F = Verificação de boas práticas de codigo
+# E = Verificação de estilo de código
+# W = Aviso sobre o estilo de codigo
+# PL = "Erros" em relação a boas práticas de codigo
+# PT = Verificação de boas praticas com o PYTEST
+# Q = Verificação de aspas
+[tool.ruff.lint]
+preview = true # Mostrar no terminal os avisos de boas práticas
+select = ["I", "F", "E", "W", "PL", "PT", "Q"]
+
+# Formatador do Ruff
+[tool.ruff.format]
+preview = true
+quote-style = "double" # Estilo de aspas, "single" = '' para todas Strings.
